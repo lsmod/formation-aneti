@@ -1,17 +1,36 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
+    <ion-title slot="start">
+      <ion-icon name="folder-open-outline"></ion-icon>
+      Offres d'emploi
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-label>Les dernières offers</ion-label>
+      </ion-card-title>
+      <ion-card-subtitle>
+        <ion-label>retrouvez ici les offres près de chez vous</ion-label>
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button (click)="loadOffer()">
+        <ion-label>charger les offre</ion-label>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-spinner name="lines" *ngIf="loading"></ion-spinner>
+
+  <div *ngIf="!loading">
+    <ion-list *ngFor="let offer of offers">
+      <ion-item>
+        <ion-label>{{ offer.company }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
